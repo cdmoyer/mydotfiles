@@ -2,6 +2,7 @@
 
 ;;; uncomment this line to disable loading of "default.el" at startup
 (setq inhibit-default-init t)
+(setq inhibit-splash-screen t)
 
 ;; turn on font-lock mode
 (when (fboundp 'global-font-lock-mode)
@@ -43,17 +44,19 @@
 
 
 ; hide menu bar
-(menu-bar-mode -1)
+(if (fboundp 'tool-bar-mode)
+ 	(tool-bar-mode -1)
+	(menu-bar-mode -1))
 
-	(defun select-next-window ()
-	   "Switch to the next window" 
-	     (interactive)
-		   (select-window (next-window)))
+(defun select-next-window ()
+   "Switch to the next window" 
+     (interactive)
+	   (select-window (next-window)))
 
-	(defun select-previous-window ()
-	   "Switch to the previous window" 
-	     (interactive)
-		   (select-window (previous-window)))
+(defun select-previous-window ()
+   "Switch to the previous window" 
+     (interactive)
+	   (select-window (previous-window)))
 
 (global-set-key (kbd "M-j") 'select-next-window)
 (global-set-key (kbd "M-k")  'select-previous-window)
